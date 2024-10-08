@@ -1,0 +1,26 @@
+// Add content box after the paragraph
+      const boxY = paragraphY + 50; // Position after paragraph
+      const boxHeight = 530; // Adjust height to fit content
+
+      // Draw rounded rectangle with border radius
+      doc.setDrawColor('#000'); // Line color
+      doc.setLineWidth(1);
+      doc.roundedRect(contentX / 1.8, boxY, contentWidth / .95, boxHeight, 25, 25, 'S'); // Adjust coordinates and size
+
+      // Add sample table if data is available
+      if (excelData) {
+        doc.autoTable({
+          startY: boxY + 10,
+          head: [['Drug', 'Drug Class', 'Icon', 'Type of Action', 'Recommendation']],
+          body: excelData.map((row) => [
+            row.drug,
+            row.drug_class,
+            row.icon,
+            row.type_of_action,
+            row.recommendation,
+          ]),
+          theme: 'striped',
+          margin: { left: 30, right: 30 },
+          styles: { fontSize: 10, cellPadding: 3 },
+        });
+      }
